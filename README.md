@@ -15,13 +15,12 @@ bla bla bla
 To recreate the environment used for this project in **VSCode**, follow these steps:
 
 1. **Clone the Repository**
+   Start by cloning the repository to your local machine using HTTPS:
 
-Start by cloning the repository to your local machine using HTTPS:
-
-```bash
-git clone https://github.com/igormiljenovic/aerogelBonding_303401.git
-cd aerogelBonding_303401
-```
+   ```bash
+   git clone https://github.com/igormiljenovic/aerogelBonding_303401.git
+   cd aerogelBonding_303401
+   ```
 
 2. **Create and Activate Environment**
    Using `requirements.txt`:
