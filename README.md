@@ -52,3 +52,9 @@ To recreate the environment used for this project in **VSCode**, follow these st
    Choose the Python interpreter associated with your virtual environment (venv).
 
 ## Section 2: Methods (**EDA & Data Pre-Processing**)
+
+## Section 3: Experimental design (**Machine Learning Model**)
+
+## Section 4: Results (**Evaluation and Analysis of Obtained Results**)
+
+## Section 5: Conclusion
