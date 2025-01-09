@@ -97,9 +97,55 @@ EDA revealed key insights, such as the majority of applicants being employed and
 
 ### Data Profiling and Statistical Overview
 
-Data profiling provided a comprehensive exploration of the dataset's characteristics, ensuring a deeper understanding of its statistical properties, distributions, and relationships. Categorical, discrete numerical, and continuous numerical variables were analyzed separately to uncover specific patterns. For instance, the "JobStatus" variable showed that 85.17% of individuals were employed, while continuous variables like "ProcessedKilograms" exhibited significant variation with notable outliers. Skewed distributions and imbalances were addressed to enhance data quality and ensure effective preprocessing.
+Data profiling provided a comprehensive exploration of the dataset's characteristics, ensuring a deeper understanding of its statistical properties, distributions, and relationships. This process involved analyzing categorical, discrete numerical, and continuous numerical variables to uncover meaningful patterns and anomalies.
 
-Outliers were identified in variables such as "HolidaysTaken" and "ProcessedKilograms," which were addressed through capping or transformations. Additionally, label encoding was applied to the "BondingSuccessful" variable to transform it into a format suitable for classification models. By systematically profiling the dataset, we ensured that all variables were appropriately prepared for subsequent modeling steps.
+#### Categorical Variables
+
+Categorical variables such as "JobStatus," "CivilStatus," and "HighestEducationAttained" were analyzed to understand their distributions and identify potential imbalances. For example, 85.17% of individuals were employed, highlighting a dominant category that may influence model predictions. Similarly, "HighestEducationAttained" showed a majority of individuals holding a bachelor's degree, while "CivilStatus" reflected that over 50% of individuals were married.
+
+Visualizations like bar charts were used to represent the frequency of these categories, providing insights into the dataset's structure. This analysis guided decisions on encoding techniques, such as one-hot encoding, to ensure categorical variables were appropriately handled during preprocessing.
+
+<img src="images/CategoricalValues.png" alt="Categorical values" />
+
+#### Discrete Numerical Variables
+
+Discrete numerical variables, such as "HolidaysTaken," "CurrentJobDuration," and "MistakesLastYear," were analyzed using descriptive statistics and visualizations. The analysis revealed key patterns:
+
+<img src="images/DiscreteNumericalValues.png" alt="Discrete numerical values" />
+
+"HolidaysTaken" had a mean of approximately 3 days, with occasional outliers reaching 13 days.
+
+"CurrentJobDuration" showed most individuals had been in their current job for 3 to 6 years, with outliers extending to 16 years.
+
+"MistakesLastYear" was highly skewed, with the majority reporting zero mistakes.
+
+These variables exhibited skewed distributions, requiring careful consideration during modeling to ensure they did not introduce bias. For example, the variable "BondingSuccessful" was imbalanced, with only 23.9% of cases being successful. This imbalance required strategies like resampling or class weighting to improve model fairness.
+
+#### Continuous Numerical Variables
+
+Continuous numerical variables, including "ProcessedKilograms," "BondingRiskRating," and "SkillRating," were analyzed for central tendencies, variability, and potential outliers. Key observations included:
+
+<img src="images/ContinousNumericalValues.png" alt="Continous numerical values" />
+
+"ProcessedKilograms" had a mean of 59,189 but exhibited extreme outliers reaching 485,341, indicating significant variability.
+
+"BondingRiskRating" was centered around a mean of 50.76, with a narrow standard deviation, suggesting consistent risk assessments.
+
+"SkillRating" demonstrated a moderately strong correlation with the target variable, highlighting its importance as a predictive feature.
+
+Statistical summaries and visualizations, such as histograms and box plots, were used to illustrate these patterns, guiding feature selection and preprocessing.
+
+#### Addressing Anomalies
+
+Outliers and skewness were addressed using transformations and capping techniques. For example, variables like "HolidaysTaken" and "ProcessedKilograms" underwent capping to reduce the influence of extreme values. Additionally, variables with high skewness, such as "MistakesLastYear," were transformed to improve their distributions.
+
+#### Feature Relationships
+
+Correlation analysis highlighted relationships between features and the target variable. Highly correlated features, such as "TotalMaterialProcessed" and "OtherCompaniesMaterialProcessed," were identified as redundant, allowing one of them to be removed. Similarly, weakly correlated features like "MonthlyExecutions" were flagged for potential exclusion, simplifying the dataset and enhancing model interpretability.
+
+#### Summary of Data Profiling
+
+Through detailed data profiling, the dataset was refined to ensure high quality and relevance for modeling. Key steps included addressing missing values, removing redundant features, transforming skewed variables, and encoding categorical data. These efforts provided a strong foundation for machine learning, enabling robust and interpretable models tailored to the aerogel bonding domain.
 
 ### Correlation Heatmap
 
