@@ -57,8 +57,6 @@ To recreate the environment used for this project in **VSCode**, follow these st
    Search for and select Python: Select Interpreter.
    Choose the Python interpreter associated with your virtual environment (venv).
 
----
-
 ## Section 2: Methods (**EDA & Data Pre-Processing**)
 
 ### Exploratory Data Analysis (EDA)
@@ -97,21 +95,15 @@ To improve model performance, feature engineering was applied. Temporal features
 
 EDA revealed key insights, such as the majority of applicants being employed and married, with many holding a bachelor's degree. "BondingRiskRating" exhibited consistent assessment criteria, while some features displayed high variability and potential outliers, requiring careful consideration during modeling. These findings guided subsequent modeling efforts, ensuring a strong foundation for predictive models tailored to the aerogel bonding process.
 
----
-
 ### Data Profiling and Statistical Overview
 
 Data profiling provided a comprehensive exploration of the dataset's characteristics, ensuring a deeper understanding of its statistical properties, distributions, and relationships. Categorical, discrete numerical, and continuous numerical variables were analyzed separately to uncover specific patterns. For instance, the "JobStatus" variable showed that 85.17% of individuals were employed, while continuous variables like "ProcessedKilograms" exhibited significant variation with notable outliers. Skewed distributions and imbalances were addressed to enhance data quality and ensure effective preprocessing.
 
 Outliers were identified in variables such as "HolidaysTaken" and "ProcessedKilograms," which were addressed through capping or transformations. Additionally, label encoding was applied to the "BondingSuccessful" variable to transform it into a format suitable for classification models. By systematically profiling the dataset, we ensured that all variables were appropriately prepared for subsequent modeling steps.
 
----
-
 ### Correlation Heatmap
 
 Correlation analysis helped identify relationships between features and the target variable, "BondingSuccessful." Highly correlated features, such as "TotalMaterialProcessed" and "OtherCompaniesMaterialProcessed," indicated redundancy, allowing one of the features to be removed to avoid multicollinearity. The analysis also highlighted key correlations with the target variable, such as the strong relationship between "SkillRating" and "BondingSuccessful," making it a critical feature for classification. Weakly correlated features, like "MonthlyExecutions," were considered for exclusion to simplify the model.
-
----
 
 ## Section 3: Experimental design (**Machine Learning Model**)
 
@@ -132,8 +124,6 @@ Starting with the initial models—Logistic Regression, Random Forest, K-Nearest
 The reduction of features to a smaller, focused subset was a significant step in this project. By narrowing down to the top 10 features based on their importance scores, we simplified the data while preserving the predictive power. This process not only enhanced computational efficiency but also improved the generalization of certain models, particularly KNN, which benefited greatly from the reduced feature set. Removing redundant and less influential features allowed us to focus on the most impactful variables, such as BondingRiskRating and ProcessedKilograms, which emerged as key predictors.
 
 Model tuning further refined the performance of each model. Grid Search and Randomized Search revealed optimal hyperparameters that balanced model complexity and performance. Logistic Regression, with its simplicity and interpretable nature, achieved its best results through a careful adjustment of the regularization parameter (C), resulting in a model that was both robust and computationally efficient. Random Forest and Gradient Boosting, both more complex ensemble methods, demonstrated their robustness with optimized parameters such as tree depth, number of estimators, and splitting criteria. These adjustments allowed these models to generalize well while minimizing the risk of overfitting. KNN, while sensitive to data distribution and local neighborhoods, also showed improvement after tuning, highlighting the importance of hyperparameter calibration to avoid underfitting or overfitting.
-
----
 
 ## Section 5: Conclusion
 
