@@ -73,7 +73,7 @@ The dataset's structure was explored by examining data types, missing values, an
 
 A key aspect of EDA was identifying and addressing missing data. Missing rates were calculated for all columns, revealing that most columns had around 10% missing values. The distribution of missing rates is visualized in the chart below:
 
-
+<img src="images/MissingRateDistribution.png" alt="Missing values distribution" />
 
 This uniform missingness pattern led to the decision to remove rows with missing values rather than applying imputation methods. While this reduced the dataset size, it ensured that the integrity of the data structure remained intact and minimized the risk of introducing bias. This approach was feasible given the manageable reduction in data size.
 
