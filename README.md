@@ -193,6 +193,106 @@ The refined dataset and final heatmap provide a solid foundation for subsequent 
 
 ## Section 3: Experimental design (**Machine Learning Model**)
 
+This section focuses on building and testing multiple machine learning models for the classification task. The goal is to identify the best-performing model that can generalize well to unseen data while addressing challenges such as overfitting and data imbalance. A systematic approach to model selection, training, and evaluation was adopted.
+
+### Model Selection
+
+Four machine learning models were chosen for evaluation, each offering unique strengths for the classification problem:
+
+- Logistic Regression is a statistical method well-suited for linearly separable data. Its simplicity and interpretability make it a strong baseline model.
+
+- Random Forest, an ensemble learning method, combines multiple decision trees to enhance accuracy and robustness. It is effective in handling noise and provides feature importance insights.
+
+- K-Nearest Neighbors (KNN) is a similarity-based algorithm that classifies data points by analyzing their nearest neighbors. It is adept at capturing non-linear relationships but may be sensitive to hyperparameters and data scaling.
+
+- Gradient Boosting Machines (GBM) is a powerful ensemble technique that builds trees sequentially, correcting errors from previous iterations. It is known for its high predictive accuracy and adaptability.
+
+### Model Training and Evaluation
+
+Each model was trained and tested on the dataset, with 80% allocated for training and 20% for testing. The performance of the models was evaluated using metrics such as accuracy, precision, recall, and F1-score. Additionally, cross-validation was employed to assess generalization and detect potential overfitting.
+
+**Logistic Regression**
+
+Logistic Regression demonstrated exceptional performance with a test accuracy of 98.67%. The precision, recall, and F1-scores for both classes (0 and 1) were consistently high, indicating balanced performance and excellent generalization. Minimal overfitting was observed, as evidenced by the small gap between training and test accuracies.
+
+**Random Forest**
+
+Random Forest matched the performance of Logistic Regression with a test accuracy of 98.67%. Its ability to handle complex datasets and provide feature importance insights makes it a reliable model. However, slight overfitting was noted, as the training accuracy reached 100%, compared to 98.67% on the test set.
+
+**K-Nearest Neighbors (KNN)**
+
+KNN achieved a test accuracy of 92%, which, although respectable, was lower than the top-performing models. Its performance was sensitive to hyperparameters such as the number of neighbors, and it exhibited variability in cross-validation results. This sensitivity indicates challenges in handling the dataset's complexity.
+
+**Gradient Boosting Machines (GBM)**
+
+GBM delivered strong results with a test accuracy of 97.33%. While slightly less accurate than Logistic Regression and Random Forest, its ensemble-based approach provided robust predictions. However, GBM showed signs of overfitting, particularly during training, which slightly impacted its generalization ability.
+
+#### Addressing Overfitting
+
+To mitigate overfitting, the following measures were implemented:
+
+Cross-validation was employed to evaluate models using multiple data splits, providing insights into their generalization ability. Additionally, training and test accuracies were compared to identify significant discrepancies indicative of overfitting. These methods confirmed that Logistic Regression and Random Forest were the best-performing models with minimal overfitting. Gradient Boosting, while robust, required additional regularization to improve generalization.
+
+### Feature Reduction and Selection
+
+The dataset originally contained 23 features, some of which were redundant or weakly correlated with the target variable. Feature importance scores from Random Forest and Gradient Boosting were used to identify the most significant predictors. The number of features was iteratively reduced to improve model simplicity and performance.
+
+#### Observations Based on Feature Importance
+
+The feature importance scores derived from the Random Forest model indicate the relative contribution of each feature to predictive performance. The most influential feature was "BondingRiskRating" with an importance score of 0.4389, making it the most critical predictor. Other significant features included "ProcessedKilograms" (0.1726) and "TotalChurnRisk" (0.0614). Features with moderate importance, such as "RequestedProcessAmount" (0.0601) and "ChurnRisk" (0.0345), were retained for their predictive value. However, features with very low importance, such as "PriorExecutionDefaults" (0.0016) and "MistakesLastYear" (0.0051), were considered for exclusion to simplify the model.
+
+Based on these insights, the feature set was reduced to eight key predictors. This reduction improved model performance and generalization, particularly for KNN, which benefited from the simplified dataset.
+
+<img src="images/numOfFeatures.png" alt="Feature importance" />
+
+### Hyperparameter Tuning
+
+Hyperparameter tuning was conducted for Logistic Regression and Random Forest using both grid search and randomized search techniques. The goal was to identify optimal parameter values that balanced model complexity and performance.
+
+**Logistic Regression**
+
+Optimal Parameters: C=10, solver='lbfgs', max_iter=100
+
+Performance: Achieved a cross-validation accuracy of 98.99% with no signs of overfitting.
+
+**Random Forest**
+
+Optimal Parameters: n_estimators=190, max_depth=5, min_samples_split=5
+
+Performance: Delivered a cross-validation accuracy of 96.66%, with reduced overfitting compared to the default configuration.
+
+These tuned parameters ensured that both models achieved their best possible performance while maintaining generalization.
+
+<img src="images/confMatLogReg.png" alt="Confussion matrix Logistic regression" />
+
+<img src="images/confMatRandFor.png" alt="Confussion matrix Random forest" />
+
+### Analysis of Results Obtained by Models
+
+The results obtained from training and testing the models provide valuable insights into their strengths and limitations.
+
+Logistic Regression emerged as the top-performing model, achieving perfect test accuracy with no misclassifications. Its confusion matrix confirmed this flawless performance, with all 38 samples of class 0 and all 37 samples of class 1 correctly classified. This exceptional generalization highlights its suitability for the dataset.
+
+<img src="images/logReg.png" alt="Logistic regression" />
+
+Random Forest, while slightly less accurate than Logistic Regression, also demonstrated excellent performance with a test accuracy of 98.67%. The confusion matrix revealed a single misclassification, where one class 1 sample was predicted as class 0. Despite this minor error, Random Forest remained a strong and reliable model.
+
+<img src="images/randFor.png" alt="Random forest" />
+
+KNN and Gradient Boosting achieved test accuracies of 92% and 97.33%, respectively. Both models exhibited robust performance but were more sensitive to hyperparameters and dataset complexity. Gradient Boosting demonstrated its strength as an ensemble method, while KNN benefited from feature reduction to improve its generalization.
+
+<img src="images/knn.png" alt="KNN" />
+
+<img src="images/gradBst.png" alt="Gradient Boosting" />
+
+ROC-AUC curves further illustrated the models' discriminative power, with all models achieving an AUC of 1.00. Logistic Regression and Random Forest showed perfect classification ability, while Gradient Boosting and KNN followed closely.
+
+<img src="images/rocCurves.png" alt="ROC-AUC curves" />
+
+Learning curves highlighted the generalization behavior of each model. Logistic Regression showed a stable and consistent fit with minimal gaps between training and validation accuracy. Random Forest exhibited minor overfitting, as evidenced by its perfect training accuracy. KNN displayed fluctuations, reflecting sensitivity to local data structures. Gradient Boosting maintained a balanced trade-off between bias and variance, achieving strong validation accuracy.
+
+Final observations confirmed that Logistic Regression was the most reliable model, combining simplicity, interpretability, and perfect generalization. Random Forest offered robust performance with the added benefit of feature importance insights. KNN and Gradient Boosting, while effective, required careful tuning and were more sensitive to data variability. The systematic evaluation demonstrated a comprehensive approach to model optimization and provided a clear direction for future deployment.
+
 ## Section 4: Results (**Evaluation and Analysis of Obtained Results**)
 
 ### Final Overall Observations
